@@ -11,7 +11,7 @@
       "name": "MIT"
     },
     "x-logo": {
-      "url": "https://terorie.com/nimiq-watch-docs/logo.svg"
+      "url": "https://terorie.com/nimiq-watch-docs/logo.png"
     },
     "description": "This API is powering [the blockchain explorer](https://nimiq.watch/)\nof the new __Nimiq blockchain__ project.\n\nTo learn more about the Nimiq blockchain,\nvisit the [homepage](https://nimiq.com),\ncheck out @nimiq on [Twitter](https://twitter.com/nimiq)\nor [Medium](https://medium.com/nimiq-network)\nand join the [Discord](https://discord.gg/cMHemg8)\nand [Telegram](https://t.me/joinchat/AAAAAEJW-ozFwo7Er9jpHw) channels.\n\nTo use this API for your project, contact __@Soeren#8998__ in Nimiq's Discord or write to hello@soerenschwert.de\n"
   },
