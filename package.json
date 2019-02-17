@@ -1,5 +1,5 @@
 {
-  "name": "nimiq.watch",
+  "name": "nimiq-watch-docs",
   "version": "1.0.0",
   "dependencies": {
     "swagger-repo": "^2.0.0-rc.11"
