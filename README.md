@@ -1,40 +1,26 @@
 # Nimiq.Watch OpenAPI Specification
 [![Build Status](https://travis-ci.org/terorie/nimiq-watch-docs.svg?branch=master)](https://travis-ci.org/terorie/nimiq-watch-docs)
-## Steps to finish
 
-1. Enable [Travis](https://docs.travis-ci.com/user/getting-started/#To-get-started-with-Travis-CI%3A) for your repository (**note**: you already have `.travis.yml` file)
-1. [Create GitHub access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/); select `public_repo` on `Select scopes` section.
-1. Use the token value as a value for [Travis environment variable](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings) with the name `GH_TOKEN`
-1. Make a test commit to trigger CI: `git commit --allow-empty -m "Test Travis CI" && git push`
-1. Wait until Travis build is finished. You can check progress by clicking on the `Build Status` badge at the top
-1. **[Optional]** You can setup [custom domain](https://help.github.com/articles/using-a-custom-domain-with-github-pages/) (just create `web/CNAME` file)
-1. **[Optional]** If your API is public consider adding it into [APIs.guru](https://APIs.guru) directory using [this form](https://apis.guru/add-api/).
-1. Delete this section ❌
+[api.nimiq.watch](https://api.nimiq.watch/) is powering [the blockchain explorer](https://nimiq.watch/)
+of the new __Nimiq blockchain__ project.
+
+To learn more about the Nimiq blockchain,
+visit the [homepage](https://nimiq.com),
+check out @nimiq on [Twitter](https://twitter.com/nimiq)
+or [Medium](https://medium.com/nimiq-network)
+and join the [Discord](https://discord.gg/cMHemg8)
+and [Telegram](https://t.me/joinchat/AAAAAEJW-ozFwo7Er9jpHw) channels.
+
+To use this API for your project, contact __@Soeren#8998__ in Nimiq's Discord or write to hello@soerenschwert.de
 
 ## Links
 
-- [Reference Documentation (ReDoc)](https://terorie.github.io/nimiq-watch-docs/)
+- [Nimiq.Watch](https://nimiq.watch)
+- [Nimiq.Watch Frontend Code](https://github.com/sisou/nimiq-watch)
+- [Nimiq Core/JS](https://github.com/nimiq-network/core)
+- [Nimiq Core/Rust](https://github.com/nimiq/core-rs)
+- [api.nimiq.watch ReDoc](https://terorie.github.io/nimiq-watch-docs/)
 - [SwaggerUI](https://terorie.github.io/nimiq-watch-docs/swagger-ui/)
 - OpenAPI Raw Files: [JSON](https://terorie.github.io/nimiq-watch-docs/openapi.json) [YAML](https://terorie.github.io/nimiq-watch-docs/openapi.yaml)
 
-**Warning:** All above links are updated only after Travis CI finishes deployment
-
-## Working on specification
-### Install
-
-1. Install [Node JS](https://nodejs.org/)
-2. Clone repo and run `npm install` in the repo root
-
-### Usage
-
-#### `npm start`
-Starts the development server.
-
-#### `npm run build`
-Bundles the spec and prepares web_deploy folder with static assets.
-
-#### `npm test`
-Validates the spec.
-
-#### `npm run gh-pages`
-Deploys docs to GitHub Pages. You don't need to run it manually if you have Travis CI configured.
+__TODO:__ Add API to [APIs.guru](https://APIs.guru) directory using [this form](https://apis.guru/add-api/).
