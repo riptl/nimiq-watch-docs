@@ -1,0 +1,8 @@
+
+apiTitle: Nimiq.Watch
+splitSpec: false
+codeSamples: true
+swaggerUI: true
+travis: true
+repo: terorie/nimiq-watch-docs
+oasVersion: 3.0.0
