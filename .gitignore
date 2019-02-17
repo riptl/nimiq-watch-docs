@@ -1,3 +1,6 @@
 # Dir for API portal deploy
 web_deploy
 node_modules
+package-lock.json
+shrinkwrap.yaml
+yarn.lock
