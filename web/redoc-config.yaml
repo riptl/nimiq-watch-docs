@@ -18,10 +18,10 @@ theme:
       fontFamily: 'Muli, sans-serif'
       fontWeight: '600'
     code:
-      fontFamily: 'Fira Code, Courier, monospace'
+      fontFamily: 'Inconsolata, Courier, monospace'
       color: '#e53935'
       backgroundColor: '#1f2348'
-      fontWeight: 400
+      fontWeight: normal
     fontWeightRegular: '600'
     fontWeightBold: '600'
     fontWeightLight: '600'
