@@ -102,6 +102,9 @@ paths:
           required: true
           description: Address
           example: "NQ11 P00L 2HYP TUK8 VY6L 2N22 MMBU MHHR BSAA"
+          schema:
+            type: string
+            format: address
       responses:
         201:
           description: Account Information
@@ -194,6 +197,7 @@ paths:
       operationId: getStatsDifficulty
       responses:
         200:
+          description: Difficulty Per Block
           content:
             application/json:
               schema:
@@ -207,6 +211,7 @@ paths:
       operationId: getStatsMiners
       responses:
         200:
+          description: Miners Of Last Blocks
           content:
             application/json:
               schema:
@@ -220,6 +225,7 @@ paths:
       operationId: getStatsTransactions
       responses:
         200:
+          description: Transaction Amount Per Block
           content:
             application/json:
               schema:
