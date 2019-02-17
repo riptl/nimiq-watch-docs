@@ -1,4 +1,27 @@
 theme:
+  spacing:
+    unit: 3
   colors:
     primary:
-      main: '#32329f'
+      main: '#e9b213'
+    success:
+      main: '#21bca5'
+    warning:
+      main: '#fc8702'
+    error:
+      main: '#d94432'
+    http:
+      get: '#0582ca'
+  typography:
+    fontFamily: 'Muli, sans-serif'
+    headings:
+      fontFamily: 'Muli, sans-serif'
+      fontWeight: '600'
+    code:
+      fontFamily: 'Fira Code, Courier, monospace'
+      color: '#e53935'
+      backgroundColor: '#1f2348'
+      fontWeight: 400
+    fontWeightRegular: '600'
+    fontWeightBold: '600'
+    fontWeightLight: '600'
