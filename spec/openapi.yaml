@@ -1,0 +1,160 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Nimiq.Watch API
+  license:
+    name: MIT
+servers:
+  - url: https://api.nimiq.watch
+  - url: http://api.nimiq.watch
+paths:
+  /latest/{limit}/{skip}:
+    get:
+      summary: Latest Blocks
+      operationId: getLatest
+      parameters:
+        - name: limit
+          in: path
+          required: true
+          description: Max number of blocks to return
+          schema:
+            type: integer
+        - name: skip
+          in: path
+          required: true
+          description: Blocks to skip (to get older blocks)
+          schema:
+            type: integer
+      responses:
+        201:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Blocks"
+        500:
+          description: Invalid parameters
+  /block/{identifier}:
+    get:
+      summary: Get Block Detail
+      operationId: getBlock
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          description: Block Number
+          schema:
+            type: integer
+      responses:
+        202:
+          description: Block Details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BlockDetail"
+        404:
+          description: Block Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example: {"error": "Block not found"}
+components:
+  schemas:
+    BlockDetail:
+      properties:
+        height:
+          type: integer
+          example: 2000
+        timestamp:
+          type: integer
+          format: uint32
+          example: 1523807468
+        hash:
+          type: string
+          format: hex
+          example: "fbe1d545b321258c5535e5fe9c47d1dd6ea162816f7777bb67446f64dd68a738"
+        miner_address:
+          type: string
+          format: address
+          example: "NQ58 U4HN TVVA FCRS VLYL 8XTL K0B7 2FVD EC6B"
+        transaction_count:
+          type: integer
+          example: 1
+        size:
+          type: integer
+          example: 453
+        difficulty:
+          type: number
+          example: 349133.88
+        extra_data:
+          type: string
+          format: byte
+          example: "c2t5cG9vbC11czEtNA=="
+        reward:
+          type: integer
+          format: uint64
+          example: 440387595
+        transactions:
+          $ref: "#/components/schemas/Transactions"
+    Block:
+      properties:
+        height:
+          type: integer
+          example: 443399
+        timestamp:
+          type: integer
+          format: uint32
+          example: 1550423567
+        hash:
+          type: string
+          format: hex
+          example: "b06f45228823045e4cf7064a305e3ba625b4175c95f21226dac53ec2f8e156c7"
+        miner_address:
+          type: string
+          format: address
+          example: "NQ11 P00L 2HYP TUK8 VY6L 2N22 MMBU MHHR BSAA"
+        transaction_count:
+          type: integer
+          example: 4
+        size:
+          type: integer
+          example: 991
+        difficulty:
+          type: number
+          example: 894956.01
+    Blocks:
+      type: array
+      items:
+        $ref: "#/components/schemas/Block"
+    Transaction:
+      properties:
+        hash:
+          type: string
+          format: hex
+          example: "50f33b7e4fb5789e2e8af07d532e669b1b52d72978e5fbd6be5c084277f4e55d"
+        sender_address:
+          type: string
+          format: address
+          example: "NQ88 D1R3 KR4H KSY2 CQYR 5G0C 80X4 0KED 32G8"
+        receiver_address:
+          type: string
+          format: address
+          example: "NQ48 8CKH BA24 2VR3 N249 N8MN J5XX 74DB 5XJ8"
+        value:
+          type: integer
+          format: uint64
+          example: 68713533000
+        fee:
+          type: integer
+          format: uint64
+          example: 0
+    Transactions:
+      type: array
+      items:
+        $ref: "#/components/schemas/Transaction"
+    Error:
+      properties:
+        error:
+          type: string
+          example: "Something went wrong"
