@@ -1,42 +1,72 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: Nimiq.Watch API
+  title: Nimiq.Watch
+  contact:
+    email: hello@soerenschwert.de
+    url: 'https://soerenschwert.de'
   license:
     name: MIT
+  x-logo:
+    url: 'https://terorie.com/nimiq-watch-docs/logo.svg'
+  description: |
+    This API is powering [the blockchain explorer](https://nimiq.watch/)
+    of the new __Nimiq blockchain__ project.
+
+    To learn more about the Nimiq blockchain,
+    visit the [homepage](https://nimiq.com),
+    check out @nimiq on [Twitter](https://twitter.com/nimiq)
+    or [Medium](https://medium.com/nimiq-network)
+    and join the [Discord](https://discord.gg/cMHemg8)
+    and [Telegram](https://t.me/joinchat/AAAAAEJW-ozFwo7Er9jpHw) channels.
+
+    To use this API for your project, contact __@Soeren#8998__ in Nimiq's Discord or write to hello@soerenschwert.de
+
+tags:
+  - name: Blocks
+    description: Blocks in the Nimiq blockchain
+  - name: Accounts
+    description: Accounts on the Nimiq blockchain
+  - name: Statistics
+    description: Statistics about the Nimiq network
+
 servers:
   - url: https://api.nimiq.watch
   - url: http://api.nimiq.watch
+
 paths:
-  /latest/{limit}/{skip}:
+  /latest:
     get:
+      tags:
+        - Blocks
       summary: Latest Blocks
       operationId: getLatest
       parameters:
         - name: limit
-          in: path
-          required: true
-          description: Max number of blocks to return
+          in: query
+          description: Max number of elements to return
           schema:
             type: integer
         - name: skip
-          in: path
-          required: true
-          description: Blocks to skip (to get older blocks)
+          in: query
+          description: Elements to skip
           schema:
             type: integer
       responses:
         201:
-          description: Expected response to a valid request
+          description: Latest Blocks
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Blocks"
         500:
-          description: Invalid parameters
+          description: Invalid limit/skip parameters
+
   /block/{identifier}:
     get:
-      summary: Get Block Detail
+      tags:
+        - Blocks
+      summary: Details Of Block
       operationId: getBlock
       parameters:
         - name: identifier
@@ -59,8 +89,162 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               example: {"error": "Block not found"}
+
+  /account/{address}:
+    get:
+      tags:
+        - Accounts
+      summary: Details Of Account
+      operationId: getAccount
+      parameters:
+        - name: address
+          in: path
+          required: true
+          description: Address
+          example: "NQ11 P00L 2HYP TUK8 VY6L 2N22 MMBU MHHR BSAA"
+      responses:
+        201:
+          description: Account Information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BlockDetail"
+        400:
+          description: "Invalid Address"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /account-transactions/{address}:
+    get:
+      tags:
+        - Accounts
+      summary: Transactions Of Account
+      operationId: getAccountTransactions
+      parameters:
+        - name: address
+          in: path
+          required: true
+          description: Account address
+          schema:
+            type: string
+            format: address
+            example: "NQ88 D1R3 KR4H KSY2 CQYR 5G0C 80X4 0KED 32G8"
+        - name: limit
+          in: query
+          description: Max number of elements to return
+          schema:
+            type: integer
+        - name: skip
+          in: query
+          description: Elements to skip
+          schema:
+            type: integer
+      responses:
+        201:
+          description: Transactions Of Account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transactions"
+        500:
+          description: Invalid limit/skip parameters
+
+  /account-blocks/{address}:
+    get:
+      tags:
+        - Accounts
+      summary: Blocks Mined By Account
+      operationId: getAccountBlocks
+      parameters:
+        - name: address
+          in: path
+          required: true
+          description: Account address
+          schema:
+            type: string
+            format: address
+            example: "NQ88 D1R3 KR4H KSY2 CQYR 5G0C 80X4 0KED 32G8"
+        - name: limit
+          in: query
+          description: Max number of elements to return
+          schema:
+            type: integer
+        - name: skip
+          in: query
+          description: Elements to skip
+          schema:
+            type: integer
+      responses:
+        201:
+          description: Blocks Mined By Account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Blocks"
+        500:
+          description: Invalid limit/skip parameters
+
+  /statistics/difficulty:
+    get:
+      tags:
+        - Statistics
+      summary: Difficulty Per Block
+      operationId: getStatsDifficulty
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DifficultyStats"
+
+  /statistics/miners:
+    get:
+      tags:
+        - Statistics
+      summary: Miners Of Last Blocks
+      operationId: getStatsMiners
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MinerStats"
+
+  /statistics/transactions:
+    get:
+      tags:
+        - Statistics
+      summary: Transaction Amount Per Block
+      operationId: getStatsTransactions
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionStats"
+
 components:
   schemas:
+    AccountDetail:
+      properties:
+        address:
+          type: string
+          format: address
+          example: "NQ11 P00L 2HYP TUK8 VY6L 2N22 MMBU MHHR BSAA"
+        balance:
+          type: integer
+          format: uint64
+          example: 66307921225
+        type:
+          type: integer
+          example: 0
+        transactions:
+          $ref: "#/components/schemas/Transaction"
+        blocks:
+          description: Blocks mined by address
+          $ref: "#/components/schemas/Blocks"
     BlockDetail:
       properties:
         height:
@@ -153,6 +337,107 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Transaction"
+    DifficultyPoint:
+      properties:
+        height:
+          type: integer
+          example: 433420
+        timestamp:
+          type: integer
+          format: uint32
+          example: 1549821671
+        difficulty:
+          type: number
+          example: 1091887.049697
+    DifficultyStats:
+      type: array
+      items:
+        $ref: "#/components/schemas/DifficultyPoint"
+      example: [
+        {
+            "height": 433420,
+            "timestamp": 1549821671,
+            "difficulty": 1091887.049697
+        },
+        {
+            "height": 433486,
+            "timestamp": 1549825228,
+            "difficulty": 1182300.320303
+        },
+        {
+            "height": 433552,
+            "timestamp": 1549828869,
+            "difficulty": 1154007.273478
+        }
+      ]
+    Miner:
+      properties:
+        miner_address:
+          type: string
+          format: address
+          example: "NQ11 P00L 2HYP TUK8 VY6L 2N22 MMBU MHHR BSAA"
+        blocks_mined:
+          type: integer
+          example: 75
+    MinerStats:
+      type: array
+      items:
+        $ref: "#/components/schemas/Miner"
+      example: [
+        {
+            "miner_address": "NQ48 8CKH BA24 2VR3 N249 N8MN J5XX 74DB 5XJ8",
+            "blocks_mined": 335
+        },
+        {
+            "miner_address": "NQ32 473Y R5T3 979R 325K S8UT 7E3A NRNS VBX2",
+            "blocks_mined": 263
+        },
+        {
+            "miner_address": "NQ11 P00L 2HYP TUK8 VY6L 2N22 MMBU MHHR BSAA",
+            "blocks_mined": 75
+        }
+      ]
+    TransactionPoint:
+      properties:
+        height:
+          type: integer
+          example: 433422
+        timestamp:
+          type: integer
+          format: uint32
+          example: 1549821705
+        value:
+          description: Total transaction value in Luna
+          type: integer
+          format: uint64
+          example: 25912910058
+        count:
+          description: Number of transactions
+          type: integer
+          example: 153
+    TransactionStats:
+      items:
+        $ref: "#/components/schemas/TransactionPoint"
+      example: [
+        {
+            "block_height": 433422,
+            "timestamp": 1549821705,
+            "value": 25912910058,
+            "count": 153
+        },
+        {
+            "block_height": 433487,
+            "timestamp": 1549825251,
+            "value": 1602500000,
+            "count": 18
+        },
+        {
+            "block_height": 433554,
+            "timestamp": 1549828952,
+            "value": 95792701434,
+            "count": 71
+        }
+      ]
     Error:
       properties:
         error:
