@@ -38,7 +38,7 @@
     }
   ],
   "paths": {
-    "/latest": {
+    "/latest/{limit}/{skip}": {
       "get": {
         "tags": [
           "Blocks"
@@ -48,7 +48,8 @@
         "parameters": [
           {
             "name": "limit",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "description": "Max number of elements to return",
             "schema": {
               "type": "integer"
@@ -56,7 +57,8 @@
           },
           {
             "name": "skip",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "description": "Elements to skip",
             "schema": {
               "type": "integer"
@@ -169,7 +171,7 @@
         }
       }
     },
-    "/account-transactions/{address}": {
+    "/account-transactions/{address}/{limit}/{skip}": {
       "get": {
         "tags": [
           "Accounts"
@@ -190,7 +192,8 @@
           },
           {
             "name": "limit",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "description": "Max number of elements to return",
             "schema": {
               "type": "integer"
@@ -198,7 +201,8 @@
           },
           {
             "name": "skip",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "description": "Elements to skip",
             "schema": {
               "type": "integer"
@@ -222,7 +226,7 @@
         }
       }
     },
-    "/account-blocks/{address}": {
+    "/account-blocks/{address}/{limit}/{skip}": {
       "get": {
         "tags": [
           "Accounts"
@@ -243,7 +247,8 @@
           },
           {
             "name": "limit",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "description": "Max number of elements to return",
             "schema": {
               "type": "integer"
@@ -251,7 +256,8 @@
           },
           {
             "name": "skip",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "description": "Elements to skip",
             "schema": {
               "type": "integer"

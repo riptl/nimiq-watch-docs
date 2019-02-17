@@ -32,7 +32,7 @@ servers:
   - url: 'https://api.nimiq.watch'
   - url: 'http://api.nimiq.watch'
 paths:
-  /latest:
+  '/latest/{limit}/{skip}':
     get:
       tags:
         - Blocks
@@ -40,12 +40,14 @@ paths:
       operationId: getLatest
       parameters:
         - name: limit
-          in: query
+          in: path
+          required: true
           description: Max number of elements to return
           schema:
             type: integer
         - name: skip
-          in: query
+          in: path
+          required: true
           description: Elements to skip
           schema:
             type: integer
@@ -114,7 +116,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  '/account-transactions/{address}':
+  '/account-transactions/{address}/{limit}/{skip}':
     get:
       tags:
         - Accounts
@@ -130,12 +132,14 @@ paths:
             format: address
             example: NQ88 D1R3 KR4H KSY2 CQYR 5G0C 80X4 0KED 32G8
         - name: limit
-          in: query
+          in: path
+          required: true
           description: Max number of elements to return
           schema:
             type: integer
         - name: skip
-          in: query
+          in: path
+          required: true
           description: Elements to skip
           schema:
             type: integer
@@ -148,7 +152,7 @@ paths:
                 $ref: '#/components/schemas/Transactions'
         '500':
           description: Invalid limit/skip parameters
-  '/account-blocks/{address}':
+  '/account-blocks/{address}/{limit}/{skip}':
     get:
       tags:
         - Accounts
@@ -164,12 +168,14 @@ paths:
             format: address
             example: NQ88 D1R3 KR4H KSY2 CQYR 5G0C 80X4 0KED 32G8
         - name: limit
-          in: query
+          in: path
+          required: true
           description: Max number of elements to return
           schema:
             type: integer
         - name: skip
-          in: query
+          in: path
+          required: true
           description: Elements to skip
           schema:
             type: integer
