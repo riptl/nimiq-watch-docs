@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Nimiq.Watch API Reference</title>
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
     <!-- needed for adaptive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="https://nimiq.watch/favicon.ico">
@@ -24,7 +26,7 @@
     <script>
       Redoc.init(
         './openapi.json',
-        {"theme":{"colors":{"primary":{"main":"#32329f"}}}},
+        {"theme":{"spacing":{"unit":3},"colors":{"primary":{"main":"#e9b213"},"success":{"main":"#21bca5"},"warning":{"main":"#fc8702"},"error":{"main":"#d94432"},"http":{"get":"#0582ca"}},"typography":{"fontFamily":"Muli, sans-serif","headings":{"fontFamily":"Muli, sans-serif","fontWeight":"600"},"code":{"fontFamily":"Fira Code, Courier, monospace","color":"#e53935","backgroundColor":"#1f2348","fontWeight":400},"fontWeightRegular":"600","fontWeightBold":"600","fontWeightLight":"600"}}},
         document.getElementById("redoc_container")
       );
     </script>
