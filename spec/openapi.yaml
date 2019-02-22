@@ -195,12 +195,24 @@ paths:
         500:
           description: Invalid limit/skip parameters
 
-  /statistics/difficulty:
+  /statistics/difficulty/{range}:
     get:
       tags:
         - Statistics
       summary: Difficulty Per Block
       operationId: getStatsDifficulty
+      parameters:
+        - name: range
+          in: path
+          required: true
+          description: Range of statistics data points
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+              - year
       responses:
         200:
           description: Difficulty Per Block
@@ -209,12 +221,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/DifficultyStats"
 
-  /statistics/miners:
+  /statistics/miners/{range}:
     get:
       tags:
         - Statistics
       summary: Miners Of Last Blocks
       operationId: getStatsMiners
+      parameters:
+        - name: range
+          in: path
+          required: true
+          description: Range of statistics data points (hours)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 24
       responses:
         200:
           description: Miners Of Last Blocks
@@ -223,12 +244,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/MinerStats"
 
-  /statistics/transactions:
+  /statistics/transactions/{range}:
     get:
       tags:
         - Statistics
       summary: Transaction Amount Per Block
       operationId: getStatsTransactions
+      parameters:
+        - name: range
+          in: path
+          required: true
+          description: Range of statistics data points
+          schema:
+            type: string
+            enum:
+              - day
+              - week
+              - month
+              - year
       responses:
         200:
           description: Transaction Amount Per Block
